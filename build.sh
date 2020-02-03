@@ -6,7 +6,7 @@
 # Generate toolchain-verilator-arch-ver.tar.gz from source code
 # sources: https://www.veripool.org/wiki/verilator
 
-VERSION=1.1.0
+VERSION=1.1.1
 
 # -- Target architectures
 ARCH=$1

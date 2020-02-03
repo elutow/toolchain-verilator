@@ -34,4 +34,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: elutow/toolchain-verilator
-    tag: true
+    tags: true
