@@ -1,9 +1,9 @@
 # -- Compile Verilator script
 
-VER=3.922
+VER=v4.026
 VERILATOR=verilator-$VER
-TAR_VERILATOR=verilator-$VER.tgz
-REL_VERILATOR=https://www.veripool.org/ftp/$TAR_VERILATOR
+TAR_VERILATOR=$VER.tar.gz
+REL_VERILATOR=https://github.com/verilator/verilator/archive/$TAR_VERILATOR
 # -- Setup
 . $WORK_DIR/scripts/build_setup.sh
 
@@ -30,21 +30,15 @@ if [ ${ARCH:0:7} == "windows" ]; then
 fi
 
 # -- Prepare for building
-./configure --build=$BUILD --host=$HOST
+./configure --build=$BUILD --host=$HOST --prefix="$PACKAGE_DIR/$NAME"
 
 # -- Compile it
 cd src
 echo CFLAGS="$MAKE_CFLAGS" CXXFLAGS="$MAKE_CXXFLAGS" LDFLAGS="$MAKE_LDFLAGS"
 make opt -j$J CFLAGS="$MAKE_CFLAGS" CXXFLAGS="$MAKE_CXXFLAGS" LDFLAGS="$MAKE_LDFLAGS"
+make install
 
 # -- Test the generated executables
 if [ $ARCH != "darwin" ]; then
-  test_bin ../bin/verilator_bin
+  test_bin $PACKAGE_DIR/$NAME/bin/verilator_bin
 fi
-
-# -- Install the programs into the package folder
-mkdir $PACKAGE_DIR/$NAME/bin
-cp ../bin/verilator_bin $PACKAGE_DIR/$NAME/bin/verilator$EXE
-
-# -- Copy share files
-cp -r $WORK_DIR/build-data/share $PACKAGE_DIR/$NAME

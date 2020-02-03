@@ -1,7 +1,7 @@
 {
   "name":"toolchain-verilator",
   "description":"Verilator toolchain",
-  "url":"https://github.com/FPGAwars/toolchain-verilator/releases",
+  "url":"https://github.com/elutow/toolchain-verilator/releases",
   "version": %VERSION%,
   "system": [ %SYSTEM% ]
 }

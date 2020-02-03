@@ -1,41 +1,38 @@
 sudo: required
-dist: trusty
-
+dist: bionic
 language: cpp
-
 matrix:
   include:
-    - os: linux
-      env: TARGET=linux_x86_64
-    - os: linux
-      env: TARGET=linux_i686
-    - os: linux
-      env: TARGET=linux_armv7l
-    - os: linux
-      env: TARGET=linux_aarch64
-    - os: linux
-      env: TARGET=windows_x86
-    - os: linux
-      env: TARGET=windows_amd64
-    - os: osx
-      env: TARGET=darwin
-
+  - os: linux
+    env: TARGET=linux_x86_64
+  - os: linux
+    env: TARGET=linux_i686
+  - os: linux
+    env: TARGET=linux_armv7l
+  - os: linux
+    env: TARGET=linux_aarch64
+  - os: linux
+    env: TARGET=windows_x86
+  - os: linux
+    env: TARGET=windows_amd64
+  - os: osx
+    env: TARGET=darwin
 before_script:
-  - if [[ ${TARGET:0:7} == "windows" ]]; then sudo dpkg --add-architecture i386; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -y -qq; fi
-
+- if [[ ${TARGET:0:7} == "windows" ]]; then sudo dpkg --add-architecture i386; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
+  fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -y -qq; fi
 script:
-  - bash build.sh $TARGET
-  - openssl sha1 _packages/**/*.tar.gz
-
+- bash build.sh $TARGET
+- openssl sha1 _packages/**/*.tar.gz
 deploy:
   provider: releases
   api_key:
-    secure: m8SNdlWdsN4XdCI5B5fExK54kMBHGcex0KnKW7EOQJN64ndGQ4PiE3ORAprMvrMVHhmTYWvBd2Kr7WguSt0HHqE3vf8hq58OHa7pfdfqX7PRqdGZ47IauLKPWmv/Cq7hm/y5taCl0OBXZVWQc4Dr3/8g48lzsiJUalnhjPlpt8IVFUDlWQqWUtp1C7Pr2qT7N6jMMTL5aZQS2RmdDXexvt2kpfgMP2kKNSeVmE5zyZlhr0VB+qWMp0jQdMX1FU3ebW9F7zc7onsgK5t52PdRu6Q8BiZ22Mq4q98ClatxZjwOtfZkbdy7O8JI6gFCKqAMdqmmbOVjleECyJghCQl2huneeWJINAGPa50bNt9Aoy6+hwGBT2iN2MxhOIOk1WcacZsnwdynTK7QKLSUYgfHZIa1ROAtIEnNXiSD03OchO4XeQde9rl8ZWEAXuV8m1JF+bNysut+HElXsLjzS7IL1yP/U79ylo7ozGF4uyVxrwRf1Fxzji0TjaQO5tdsF5cB0LHJ3H422uT+XTilzQ+rczakoPQgaSbOPUfwrVd2EN1XSknEsrpZ/otntd6JA20pmz1zENodouAeRMee7KoRE5bOuiRpDQ3iEKISUhCgnPxZ06scKFERSmHg16UY/KxkCBJ8QYhVBv/kbzXVGzO1B6E2lZWM0izggJ002lcoQpY=
-  file:
-    - _packages/**/*.tar.gz
+    secure: 1opHR+xAD/YbtggpTADlXCGRJoNfH2s/kt/4Ytki9GBqo/Bvjlt7Yz/k2k3rt8waXXHjm4Tek5uT9elmi5fRiXoryhishti2jkF0WDoDX0ADyNlGT213I83DCCSnsM9VxcLi0I5GeUNJvaPNTeUdZoUyrxWNYbwpLmZihCGPDDfqzD+XmmbNHWfq3JaRlXaPVme6YYyWEZOUOfAZSryRNxBbIwdl0kGor0BL8jmR+U6skpi9Zbv5e0gUx103Jv3eeHrxmrG7XlRMcd5LpYyI+irnKAemzZUSYi4QcSwwNBZkLR/uCivDHnFKiFtrEHO4/KxOKkfoqZutdEynIOANKGuffqcAvTV7sVBTLZD1Ooe2CC/TXqnoXmaJgjJYcY44nVZCcg7cUBXoG2rULH+/lhCG4ucPrbH/PtGWbrmuudrttV//sjQ3+1MFHIcFYOVEM0Eza/uvi7AWNF11YA6Awu9MWh4mMgqWpeUdi4vsZFJeSe2gUPgscx2AhI6EOZn2MYgM6cJesjVtYfN0AnsWwOoqabLxzKeoVSJ4xM3IGWdCVzVC1vbDFBG2UFy32GpX0QfTLwN8tqpCnZHNXF+MiJ+/6a79V/POb3Mlm9ybcMN/b6RD/cq2fm56Q8RGMZolM/5OvHfymtXPa+34QMZUrHCy3viZIG4kk3DYGe2PC3A=
+  file: _packages/**/*.tar.gz
   file_glob: true
   skip_cleanup: true
   on:
+    repo: elutow/toolchain-verilator
     all_branches: true
+    tag: true

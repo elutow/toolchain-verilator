@@ -27,7 +27,7 @@ fi
 
 if [ ${ARCH:0:7} == "windows" ]; then
   sudo apt-get install -y build-essential bison flex gperf autoconf \
-                          mingw-w64 mingw-w64-tools wine
+                          mingw-w64 mingw-w64-tools wine-development
   sudo apt-get autoremove -y
 fi
 

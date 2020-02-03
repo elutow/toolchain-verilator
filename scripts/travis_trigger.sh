@@ -25,6 +25,6 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token $TOKEN" \
   -d "$body" \
-  https://api.travis-ci.org/repo/FPGAwars%2Ftoolchain-verilator/requests
+  https://api.travis-ci.org/repo/elutow%2Ftoolchain-verilator/requests
 
 echo "\n> Done!"
