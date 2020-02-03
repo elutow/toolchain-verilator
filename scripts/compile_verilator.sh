@@ -1,8 +1,8 @@
 # -- Compile Verilator script
 
-VER=v4.026
+VER=4.026
 VERILATOR=verilator-$VER
-TAR_VERILATOR=$VER.tar.gz
+TAR_VERILATOR=v$VER.tar.gz
 REL_VERILATOR=https://github.com/verilator/verilator/archive/$TAR_VERILATOR
 # -- Setup
 . $WORK_DIR/scripts/build_setup.sh
