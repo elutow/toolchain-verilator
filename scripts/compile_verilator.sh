@@ -30,6 +30,7 @@ if [ ${ARCH:0:7} == "windows" ]; then
 fi
 
 # -- Prepare for building
+autoconf
 ./configure --build=$BUILD --host=$HOST --prefix="$PACKAGE_DIR/$NAME"
 
 # -- Compile it
