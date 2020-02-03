@@ -31,12 +31,11 @@ fi
 
 # -- Prepare for building
 autoconf
-./configure --build=$BUILD --host=$HOST --prefix="$PACKAGE_DIR/$NAME"
+echo CFLAGS="$MAKE_CFLAGS" CXXFLAGS="$MAKE_CXXFLAGS" LDFLAGS="$MAKE_LDFLAGS"
+./configure --build=$BUILD --host=$HOST --prefix="$PACKAGE_DIR/$NAME" CFLAGS="$MAKE_CFLAGS" CXXFLAGS="$MAKE_CXXFLAGS" LDFLAGS="$MAKE_LDFLAGS"
 
 # -- Compile it
-cd src
-echo CFLAGS="$MAKE_CFLAGS" CXXFLAGS="$MAKE_CXXFLAGS" LDFLAGS="$MAKE_LDFLAGS"
-make opt -j$J CFLAGS="$MAKE_CFLAGS" CXXFLAGS="$MAKE_CXXFLAGS" LDFLAGS="$MAKE_LDFLAGS"
+make -j$J
 make install
 
 # -- Test the generated executables
