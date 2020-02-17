@@ -1,6 +1,6 @@
 # -- Compile Verilator script
 
-VER=4.026
+VER=4.028
 VERILATOR=verilator-$VER
 TAR_VERILATOR=v$VER.tar.gz
 REL_VERILATOR=https://github.com/verilator/verilator/archive/$TAR_VERILATOR
